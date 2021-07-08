@@ -259,7 +259,7 @@ class _AppDrawerState extends State<AppDrawer> {
             //ALL THE SIDEBAR OPTIONS, instead of ProfilePage Widget in all the remaining arguments, use the correct page widget for the respective pages.
 
             _sideBarSectionWithCheckForGuestUser(
-                "Profile", Icons.person, ProfilePage()),
+                "Profile1", Icons.person, ProfilePage()),
             _sideBarSection(
                 'Nearest Station', Icons.battery_charging_full, MapsPage()),
             _sideBarSectionWithCheckForGuestUser("Vehicle Details",
@@ -300,6 +300,8 @@ class _AppDrawerState extends State<AppDrawer> {
           constraints: BoxConstraints(
             minWidth: MediaQuery.of(context).size.width,
           ),
+          //akfjdaskdfjaklsdjfksl;fasdlcmaksdfjoaiwemcoasdkfaopeimceokc
+          //asdfkajsdklfaksldfkadmfklaejcaekwmcaiowej0923u4230j[]
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
