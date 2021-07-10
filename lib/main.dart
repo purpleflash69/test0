@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:side_bar/login.dart';
 import 'profile.dart';
 import 'vehicleDetails.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'about.dart';
 import 'maps.dart';
+import 'login.dart';
+import 'forgot_password.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: AppDrawer());
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Signin(),
+        '/signup': (context) => Signup(),
+        '/signin': (context) => Signin(),
+        '/guest': (context) => Guest(),
+        '/forgot': (context) => ForgotPassword(),
+        '/home': (context) => AppDrawer(),
+      },
+    );
   }
 }
 
@@ -259,7 +272,7 @@ class _AppDrawerState extends State<AppDrawer> {
             //ALL THE SIDEBAR OPTIONS, instead of ProfilePage Widget in all the remaining arguments, use the correct page widget for the respective pages.
 
             _sideBarSectionWithCheckForGuestUser(
-                "Profile1", Icons.person, ProfilePage()),
+                "Profile", Icons.person, ProfilePage()),
             _sideBarSection(
                 'Nearest Station', Icons.battery_charging_full, MapsPage()),
             _sideBarSectionWithCheckForGuestUser("Vehicle Details",
@@ -270,7 +283,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
             _sideBarSection('About', Icons.info, AboutPage()),
 
-            _sideBarSection('Log Out', Icons.logout, ProfilePage()) //Change it
+            _sideBarSection('Log Out', Icons.logout, Signin())
           ],
         ),
       ),
