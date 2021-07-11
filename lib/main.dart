@@ -600,6 +600,10 @@ class _AppDrawerState extends State<AppDrawer> {
                             // chargeLessThan30popUp = false;
                             Navigator.pop(context);
                             //Navigate to maps page.
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MapsPage()));
                           },
                           child: Text(
                             'Yes',
