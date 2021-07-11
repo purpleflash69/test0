@@ -9,6 +9,7 @@ import 'login.dart';
 import 'forgot_password.dart';
 
 void main() => runApp(MyApp());
+bool guestUser = false;
 
 class MyApp extends StatelessWidget {
   @override
@@ -33,15 +34,15 @@ class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
-  _AppDrawerState createState() => _AppDrawerState();
+  AppDrawerState createState() => AppDrawerState();
 }
 
 //App drawer widget
-class _AppDrawerState extends State<AppDrawer> {
+class AppDrawerState extends State<AppDrawer> {
   String dropdownValue = 'Vehicle-1';
   bool chargeLessThan30popUp = true;
-  bool guestUser =
-      false; //True means that guest user is using the app, so profile and vehicle details page is restricted. Change it when a user logs in or sign up!!
+  //bool guestUser =
+  //false; //True means that guest user is using the app, so profile and vehicle details page is restricted. Change it when a user logs in or sign up!!
   String voltage = "12 V";
   String minTemp = "27";
   String maxTemp = "35";

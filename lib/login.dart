@@ -130,6 +130,7 @@ class Signin extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.pushNamed(context, '/home');
+                            guestUser = false;
                           },
                         ),
                       ),
@@ -402,6 +403,8 @@ class Signup extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.pushNamed(context, '/home');
+                            guestUser = false;
+                            ;
                           },
                         ),
                       ),
@@ -589,6 +592,7 @@ class Guest extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.pushNamed(context, '/home');
+                            guestUser = true;
                           },
                         ),
                       ),
