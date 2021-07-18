@@ -47,10 +47,6 @@ class ImageName extends StatefulWidget {
 }
 
 class _ImageNameState extends State<ImageName> {
-  final vehicleNumber = 'MH 12 AB 1234';
-  final vehicleRegName = "John Doe";
-  final modelNum = '12345';
-  final regID = '#12345678';
   //Change all these variables in the future.
 
   @override
@@ -81,6 +77,9 @@ class _ImageNameState extends State<ImageName> {
                 // ),
                 textBox(
                     " We are a battery swapping technology startup based in Indore, India. Our mission is :Together with people, we will catalyse the transition to sustainable electric mobility.We are currently in the conception phase and developing our prototypes with a target to launch pilot phase by starting of the next year and product launch in the following year with an initial investment of ₹100 million."),
+                SizedBox(
+                  height: 30,
+                ),
                 textBoxBold("Product"),
                 textBox(
                     "Our idea is to create an ecosystem of universal battery swapping stations for electric vehicles to enhance the growth of EV in India. We are developing our own dedicated battery packs and swapping station technology for the same."),
@@ -97,6 +96,11 @@ class _ImageNameState extends State<ImageName> {
                 //   height: 0,
                 //   color: Colors.black,
                 // ),
+                SizedBox(
+                  height: 30,
+                ),
+                textBoxBold("Version"),
+                textBox("1.0.0"),
                 SizedBox(
                   height: 30,
                 ),
