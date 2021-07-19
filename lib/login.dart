@@ -432,11 +432,9 @@ class Signup extends StatelessWidget {
                             AuthService()
                                 .signup(name, customerid, mobile, password)
                                 .then((val) {
-                              if (val.data['success']) {
-                                token = val.data['token'];
-                                Navigator.pushNamed(context, '/home');
-                                guestUser = false;
-                              }
+                              token = val.data['token'];
+                              Navigator.pushNamed(context, '/home');
+                              guestUser = false;
                             });
                           },
                         ),
