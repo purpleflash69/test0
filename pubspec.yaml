@@ -23,6 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  razorpay_flutter: ^1.2.7
+  fluttertoast: ^8.0.7
+  google_maps_flutter: ^2.0.2
+  dio: ^4.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

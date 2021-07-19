@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:side_bar/available_staions.dart';
 import 'package:side_bar/login.dart';
 import 'package:side_bar/services.dart';
 import 'profile.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => Signin(),
+        '/': (context) => AppDrawer(), //Chane to Sign in.
         '/signup': (context) => Signup(),
         '/signin': (context) => Signin(),
         '/guest': (context) => Guest(),
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => AppDrawer(),
         '/setpassword': (context) => SetPassword(),
         '/otp': (context) => Otp(),
+        '/available_Station': (context) => AvailableStations(),
       },
     );
   }
@@ -59,7 +61,7 @@ class AppDrawerState extends State<AppDrawer> {
   double gaugeMaxForCharge = 100;
   double gaugeMinForkWh = 0;
   double gaugeMaxForkWh = 10000;
-  double gaugeCurrentForCharge = 29;
+  double gaugeCurrentForCharge = 31;
   // double gaugeCurrentForkWh = 5000;
   double gaugeMin = 0;
   double gaugeMax = 100;
@@ -248,8 +250,8 @@ class AppDrawerState extends State<AppDrawer> {
               floatingActionButton: FloatingActionButton(
                 child: Icon(Icons.gps_fixed),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MapsPage()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Maps()));
                 },
                 backgroundColor: Colors.blue[900],
               ),
@@ -345,8 +347,10 @@ class AppDrawerState extends State<AppDrawer> {
 
                     _sideBarSectionWithCheckForGuestUser(
                         "Profile", Icons.person, ProfilePage()),
-                    _sideBarSection('Nearest Station',
-                        Icons.battery_charging_full, ProfilePage()), //NEW**
+                    _sideBarSection(
+                        'Nearest Station',
+                        Icons.battery_charging_full,
+                        AvailableStations()), //NEW**
                     _sideBarSectionWithCheckForGuestUser("Vehicle Details",
                         Icons.list_alt_outlined, VehicleDetailsPage()),
 
@@ -700,7 +704,7 @@ class AppDrawerState extends State<AppDrawer> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapsPage()));
+                                    builder: (context) => Maps()));
                           },
                           child: Text(
                             'Yes',

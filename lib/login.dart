@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:side_bar/authservice.dart';
 import 'forgot_password.dart';
 import 'main.dart';
 import 'maps.dart';
@@ -29,9 +30,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Signin extends StatelessWidget {
-  const Signin({Key? key}) : super(key: key);
+  Signin({Key? key}) : super(key: key);
 
+  var mobile, password, token;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -88,6 +91,9 @@ class Signin extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'Enter Mobile no. here',
                         ),
+                        onChanged: (val) {
+                          mobile = val;
+                        },
                       ),
                     ),
                     Row(
@@ -113,6 +119,9 @@ class Signin extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'Password',
                         ),
+                        onChanged: (val) {
+                          password = val;
+                        },
                       ),
                     ),
                     Container(
@@ -129,8 +138,13 @@ class Signin extends StatelessWidget {
                                 color: Color(0xFF282F62), fontSize: 15.0),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/home');
-                            guestUser = false;
+                            AuthService().login(mobile, password).then((val) {
+                              if (val.data['success']) {
+                                token = val.data['token'];
+                                Navigator.pushNamed(context, '/home');
+                                guestUser = false;
+                              }
+                            });
                           },
                         ),
                       ),
@@ -252,7 +266,8 @@ class Signin extends StatelessWidget {
 }
 
 class Signup extends StatelessWidget {
-  const Signup({Key? key}) : super(key: key);
+  Signup({Key? key}) : super(key: key);
+  var name, customerid, mobile, password, token;
 
   @override
   Widget build(BuildContext context) {
@@ -310,6 +325,9 @@ class Signup extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'Enter Name here',
                         ),
+                        onChanged: (val) {
+                          name = val;
+                        },
                       ),
                     ),
                     Row(
@@ -335,6 +353,9 @@ class Signup extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'CUSTOMER ID here',
                         ),
+                        onChanged: (val) {
+                          customerid = val;
+                        },
                       ),
                     ),
                     Row(
@@ -360,6 +381,9 @@ class Signup extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'Enter Mobile no. here',
                         ),
+                        onChanged: (val) {
+                          mobile = val;
+                        },
                       ),
                     ),
                     Row(
@@ -385,6 +409,9 @@ class Signup extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'Password',
                         ),
+                        onChanged: (val) {
+                          password = val;
+                        },
                       ),
                     ),
 
@@ -402,9 +429,15 @@ class Signup extends StatelessWidget {
                                 color: Color(0xFF282F62), fontSize: 15.0),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/home');
-                            guestUser = false;
-                            ;
+                            AuthService()
+                                .signup(name, customerid, mobile, password)
+                                .then((val) {
+                              if (val.data['success']) {
+                                token = val.data['token'];
+                                Navigator.pushNamed(context, '/home');
+                                guestUser = false;
+                              }
+                            });
                           },
                         ),
                       ),
@@ -512,8 +545,8 @@ class Signup extends StatelessWidget {
 }
 
 class Guest extends StatelessWidget {
-  const Guest({Key? key}) : super(key: key);
-
+  Guest({Key? key}) : super(key: key);
+  var customerid, token;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -574,6 +607,9 @@ class Guest extends StatelessWidget {
                           border: OutlineInputBorder(),
                           hintText: 'Customer ID here',
                         ),
+                        onChanged: (val) {
+                          customerid = val;
+                        },
                       ),
                     ),
 
@@ -591,8 +627,13 @@ class Guest extends StatelessWidget {
                                 color: Color(0xFF282F62), fontSize: 15.0),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/home');
-                            guestUser = true;
+                            AuthService().guest(customerid).then((val) {
+                              if (val.data['success']) {
+                                token = val.data['token'];
+                                Navigator.pushNamed(context, '/home');
+                                guestUser = true;
+                              }
+                            });
                           },
                         ),
                       ),
