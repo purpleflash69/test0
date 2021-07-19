@@ -8,9 +8,12 @@ Widget textBoxBold(
     Text(
       str,
       style: GoogleFonts.lato(
-          fontWeight: FontWeight.bold, letterSpacing: 2, fontSize: 24),
+          fontWeight: FontWeight.bold,
+          letterSpacing: 2,
+          fontSize: 24,
+          backgroundColor: Colors.black12),
     ),
-    SizedBox(height: 50),
+    SizedBox(height: 10),
   ]);
 }
 
@@ -22,10 +25,11 @@ Widget textBox(
       Text(
         str,
         style: TextStyle(
-            letterSpacing: 2,
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            backgroundColor: Colors.black12),
+          letterSpacing: 2,
+          fontSize: 19,
+          fontWeight: FontWeight.bold,
+          // backgroundColor: Colors.black12
+        ),
       ),
       SizedBox(height: 10),
     ],
@@ -47,8 +51,6 @@ class ImageName extends StatefulWidget {
 }
 
 class _ImageNameState extends State<ImageName> {
-  //Change all these variables in the future.
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

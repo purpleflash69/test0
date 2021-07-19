@@ -59,7 +59,7 @@ class AppDrawerState extends State<AppDrawer> {
   double gaugeMaxForCharge = 100;
   double gaugeMinForkWh = 0;
   double gaugeMaxForkWh = 10000;
-  double gaugeCurrentForCharge = 31;
+  double gaugeCurrentForCharge = 29;
   // double gaugeCurrentForkWh = 5000;
   double gaugeMin = 0;
   double gaugeMax = 100;
@@ -226,6 +226,13 @@ class AppDrawerState extends State<AppDrawer> {
         future: futureAlbum,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            //         if ( snapshot
+            //               .data!.data.vehicles[index].batteryInformation.charge< 30 && chargeLessThan30popUp) {
+
+            //   Future.delayed(Duration.zero, () => showAlert(context));
+
+            //   chargeLessThan30popUp = false;
+            // }
             if (isClicked) {
               gaugeCurrent = snapshot
                   .data!.data.vehicles[index].batteryInformation.charge
