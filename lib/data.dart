@@ -19,9 +19,15 @@ class BatteryDetails {
 
 class StationBrain {
   List<StationDetails> stationBank = [
-    StationDetails(sn: 'WeSwap Station #1', sa: 'Address of station #1'),
-    StationDetails(sn: 'WeSwap Station #2', sa: 'Address of station #2'),
-    StationDetails(sn: 'WeSwap Station #3', sa: 'Address of station #3'),
+    StationDetails(
+        sn: 'Indore Airport',
+        sa: 'Devi Ahillyabai Holkar Airport Area, Indore, Madhya Pradesh 453112'),
+    StationDetails(
+        sn: 'District Court Indore',
+        sa: 'New Siyaganj, Indore, Madhya Pradesh 452007'),
+    StationDetails(
+        sn: 'Central Museum Indore',
+        sa: 'Near GPO Square, Residency, Navlakha, Indore, Madhya Pradesh 452001'),
   ];
 }
 

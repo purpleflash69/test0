@@ -35,10 +35,42 @@ class _MapPageState extends State<MapPage> {
       _markers.add(
         Marker(
           markerId: MarkerId('station 1'),
-          position: LatLng(22.7196, 75.8577),
+          position: LatLng(22.7266875, 75.8061875),
           infoWindow: InfoWindow(
-              title: 'WeSwap Station #1',
-              snippet: 'address of the Station',
+              title: 'Indore Airport',
+              snippet:
+                  'Devi Ahillyabai Holkar Airport Area, Indore, Madhya Pradesh 453112',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AvailableStations()),
+                );
+              }),
+        ),
+      );
+      _markers.add(
+        Marker(
+          markerId: MarkerId('station 2'),
+          position: LatLng(22.7208125, 75.8644375),
+          infoWindow: InfoWindow(
+              title: 'District Court Indore',
+              snippet: 'New Siyaganj, Indore, Madhya Pradesh 452007',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AvailableStations()),
+                );
+              }),
+        ),
+      );
+      _markers.add(
+        Marker(
+          markerId: MarkerId('station 3'),
+          position: LatLng(22.7053125, 75.8793125),
+          infoWindow: InfoWindow(
+              title: 'Central Museum Indore',
+              snippet:
+                  'Near GPO Square, Residency, Navlakha, Indore, Madhya Pradesh 452001',
               onTap: () {
                 Navigator.push(
                   context,
@@ -58,7 +90,7 @@ class _MapPageState extends State<MapPage> {
       markers: _markers,
       initialCameraPosition: CameraPosition(
         target: LatLng(22.7196, 75.8577),
-        zoom: 15,
+        zoom: 12,
       ),
     ));
   }

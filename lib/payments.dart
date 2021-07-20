@@ -31,7 +31,7 @@ class Payments extends StatefulWidget {
 
 class _PaymentsState extends State<Payments> {
   late Razorpay razorpay;
-  TextEditingController textEditingController = new TextEditingController();
+  // TextEditingController textEditingController = new TextEditingController();
 
   @override
   void initState() {
@@ -52,7 +52,8 @@ class _PaymentsState extends State<Payments> {
   void openCheckout() {
     var options = {
       "key": "rzp_test_JtKuAyVPzTigO7",
-      "amount": num.parse(textEditingController.text) * 100,
+      "amount": 250 * 100,
+      // "amount": num.parse(textEditingController.text) * 100,
       "name": "WeSwap App",
       "description": "Payment for Battery",
       "prefill": {"contact": "1234567890", "email": "abc@gmail.com"},
@@ -106,12 +107,52 @@ class _PaymentsState extends State<Payments> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+        // Padding(
+        //   padding: const EdgeInsets.all(15.0),
+        //   child: Row(
+        //     children: [
+        //       Text(
+        //         'Station',
+        //         style: TextStyle(
+        //           color: Colors.white,
+        //           fontSize: 20,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // Card(
+        //   color: Colors.indigo[800],
+        //   child: ListTile(
+        //     title: Text('current station'),
+        //   ),
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.all(15.0),
+        //   child: Row(
+        //     children: [
+        //       Text(
+        //         'Battery',
+        //         style: TextStyle(
+        //           color: Colors.white,
+        //           fontSize: 20,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // Card(
+        //   color: Colors.indigo[800],
+        //   child: ListTile(
+        //     title: Text('Battery #'),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
             children: [
               Text(
-                'Station',
+                'Amount to pay',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -123,41 +164,7 @@ class _PaymentsState extends State<Payments> {
         Card(
           color: Colors.indigo[800],
           child: ListTile(
-            title: Text('current station'),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            children: [
-              Text(
-                'Battery',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Card(
-          color: Colors.indigo[800],
-          child: ListTile(
-            title: Text('Battery #'),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            children: [
-              Text(
-                'Battery Price',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ],
+            title: Text('Rs 250'),
           ),
         ),
         // Card(
@@ -166,13 +173,13 @@ class _PaymentsState extends State<Payments> {
         //     title: Text('Rs 250'),
         //   ),
         // ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            controller: textEditingController,
-            decoration: InputDecoration(hintText: "amount to pay"),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: TextField(
+        //     controller: textEditingController,
+        //     decoration: InputDecoration(hintText: "amount to pay"),
+        //   ),
+        // ),
         SizedBox(height: 50),
         ElevatedButton(
           onPressed: () {
