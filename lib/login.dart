@@ -8,9 +8,9 @@ import 'services.dart';
 import 'vehicleDetails.dart';
 import 'about.dart';
 
-void main() {
+/*void main() {
   runApp(MyApp());
-}
+}*/
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -267,7 +267,7 @@ class Signin extends StatelessWidget {
 
 class Signup extends StatelessWidget {
   Signup({Key? key}) : super(key: key);
-  var name, customerid, mobile, password, token;
+  var customerid, confirmpassword, password, token;
 
   @override
   Widget build(BuildContext context) {
@@ -302,34 +302,7 @@ class Signup extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                          child: Text(
-                            'NAME',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 15.0),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                      child: TextField(
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          fillColor: Color(0xFF282F62),
-                          filled: true,
-                          border: OutlineInputBorder(),
-                          hintText: 'Enter Name here',
-                        ),
-                        onChanged: (val) {
-                          name = val;
-                        },
-                      ),
-                    ),
+
                     Row(
                       children: [
                         Container(
@@ -358,34 +331,7 @@ class Signup extends StatelessWidget {
                         },
                       ),
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                          child: Text(
-                            'MOBILE NUMBER',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 15.0),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                      child: TextField(
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          fillColor: Color(0xFF282F62),
-                          filled: true,
-                          border: OutlineInputBorder(),
-                          hintText: 'Enter Mobile no. here',
-                        ),
-                        onChanged: (val) {
-                          mobile = val;
-                        },
-                      ),
-                    ),
+
                     Row(
                       children: [
                         Container(
@@ -414,6 +360,34 @@ class Signup extends StatelessWidget {
                         },
                       ),
                     ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                          child: Text(
+                            ' CONFIRM PASSWORD',
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 15.0),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      child: TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          fillColor: Color(0xFF282F62),
+                          filled: true,
+                          border: OutlineInputBorder(),
+                          hintText: 'Confirm Password',
+                        ),
+                        onChanged: (val) {
+                          confirmpassword = val;
+                        },
+                      ),
+                    ),
 
                     Container(
                       padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -430,7 +404,7 @@ class Signup extends StatelessWidget {
                           ),
                           onPressed: () {
                             AuthService()
-                                .signup(name, customerid, mobile, password)
+                                .signup(customerid, confirmpassword, password)
                                 .then((val) {
                               token = val.data['token'];
                               Navigator.pushNamed(context, '/home');

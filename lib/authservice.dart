@@ -22,13 +22,12 @@ class AuthService {
     }
   }
 
-  signup(name, customerid, mobile, password) async {
+  signup(customerid, confirmpassword, password) async {
     try {
       return await dio.post('/*enter heroku url here*/',
           data: {
-            "name": name,
             "customerid": customerid,
-            "mobile": mobile,
+            "confirmpassword": confirmpassword,
             "password": password
           },
           options: Options(contentType: Headers.formUrlEncodedContentType));

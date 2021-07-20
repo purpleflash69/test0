@@ -21,14 +21,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => AppDrawer(), //Chane to Sign in.
+        '/': (context) => Signin(), //Chane to Sign in.
         '/signup': (context) => Signup(),
         '/signin': (context) => Signin(),
         '/guest': (context) => Guest(),
         '/forgot': (context) => ForgotPassword(),
         '/home': (context) => AppDrawer(),
         '/setpassword': (context) => SetPassword(),
-        '/otp': (context) => Otp(),
+        //'/otp': (context) => Otp(),
         '/available_Station': (context) => AvailableStations(),
       },
     );
