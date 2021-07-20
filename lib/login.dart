@@ -138,13 +138,15 @@ class Signin extends StatelessWidget {
                                 color: Color(0xFF282F62), fontSize: 15.0),
                           ),
                           onPressed: () {
-                            AuthService().login(mobile, password).then((val) {
-                              if (val.data['success']) {
-                                token = val.data['token'];
-                                Navigator.pushNamed(context, '/home');
-                                guestUser = false;
-                              }
-                            });
+                            // AuthService().login(mobile, password).then((val) {
+                            //   if (val.data['success']) {
+                            //     token = val.data['token'];
+                            //     Navigator.pushNamed(context, '/home');
+                            //     guestUser = false;
+                            //   }
+                            // });
+                            Navigator.pushNamed(context, '/home');
+                            guestUser = false;
                           },
                         ),
                       ),
@@ -429,15 +431,18 @@ class Signup extends StatelessWidget {
                                 color: Color(0xFF282F62), fontSize: 15.0),
                           ),
                           onPressed: () {
-                            AuthService()
-                                .signup(name, customerid, mobile, password)
-                                .then((val) {
-                              if (val.data['success']) {
-                                token = val.data['token'];
-                                Navigator.pushNamed(context, '/home');
-                                guestUser = false;
-                              }
-                            });
+                            // AuthService()
+                            //     .signup(name, customerid, mobile, password)
+                            //     .then((val) {
+                            //   if (val.data['success']) {
+                            //     token = val.data['token'];
+                            //     Navigator.pushNamed(context, '/home');
+                            //     guestUser = false;
+                            //   }
+
+                            // }
+                            Navigator.pushNamed(context, '/home');
+                            guestUser = false;
                           },
                         ),
                       ),
@@ -627,13 +632,15 @@ class Guest extends StatelessWidget {
                                 color: Color(0xFF282F62), fontSize: 15.0),
                           ),
                           onPressed: () {
-                            AuthService().guest(customerid).then((val) {
-                              if (val.data['success']) {
-                                token = val.data['token'];
-                                Navigator.pushNamed(context, '/home');
-                                guestUser = true;
-                              }
-                            });
+                            // AuthService().guest(customerid).then((val) {
+                            //   if (val.data['success']) {
+                            //     token = val.data['token'];
+                            //     Navigator.pushNamed(context, '/home');
+                            //     guestUser = true;
+                            //   }
+                            // });
+                            Navigator.pushNamed(context, '/home');
+                            guestUser = true;
                           },
                         ),
                       ),

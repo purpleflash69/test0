@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => AppDrawer(), //Chane to Sign in.
+        '/': (context) => Signin(), //Chane to Sign in.
         '/signup': (context) => Signup(),
         '/signin': (context) => Signin(),
         '/guest': (context) => Guest(),
@@ -89,12 +89,12 @@ class AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    if (gaugeCurrentForCharge < 30 && chargeLessThan30popUp) {
-      //new
-      Future.delayed(Duration.zero, () => showAlert(context));
-      //NEW
-      chargeLessThan30popUp = false;
-    }
+    // if (gaugeCurrentForCharge < 30 && chargeLessThan30popUp) {
+    //   //new
+    //   Future.delayed(Duration.zero, () => showAlert(context));
+    //   //NEW
+    //   chargeLessThan30popUp = false;
+    // }
 
     SfLinearGauge _temperatureGuage(double tempCurrent) {
       return SfLinearGauge(
@@ -228,13 +228,14 @@ class AppDrawerState extends State<AppDrawer> {
         future: futureAlbum,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            //         if ( snapshot
-            //               .data!.data.vehicles[index].batteryInformation.charge< 30 && chargeLessThan30popUp) {
+            // final name = assign it to name variable from API
+            if (snapshot.data!.data.vehicles[index].batteryInformation.charge <
+                    30 &&
+                chargeLessThan30popUp) {
+              Future.delayed(Duration.zero, () => showAlert(context));
 
-            //   Future.delayed(Duration.zero, () => showAlert(context));
-
-            //   chargeLessThan30popUp = false;
-            // }
+              chargeLessThan30popUp = false;
+            }
             if (isClicked) {
               gaugeCurrent = snapshot
                   .data!.data.vehicles[index].batteryInformation.charge
@@ -335,22 +336,34 @@ class AppDrawerState extends State<AppDrawer> {
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: <Widget>[
-                    DrawerHeader(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[900],
+                    // DrawerHeader(
+                    //   padding: EdgeInsets.all(10),
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.blue[900],
+                    //   ),
+                    //   // child: ProfileImage(),
+
+                    // ),
+                    Container(
+                      height: 150,
+                      child: DrawerHeader(
+                        decoration: BoxDecoration(
+                          color: Colors.blue[900],
+                        ),
+                        child: Center(
+                          child: Text("WeSwap",
+                              style:
+                                  TextStyle(fontSize: 24, color: Colors.white)),
+                        ),
                       ),
-                      child: ProfileImage(),
                     ),
 
                     //ALL THE SIDEBAR OPTIONS, instead of ProfilePage Widget in all the remaining arguments, use the correct page widget for the respective pages.
 
                     _sideBarSectionWithCheckForGuestUser(
                         "Profile", Icons.person, ProfilePage()),
-                    _sideBarSection(
-                        'Nearest Station',
-                        Icons.battery_charging_full,
-                        AvailableStations()), //NEW**
+                    _sideBarSection('Nearest Station',
+                        Icons.battery_charging_full, AvailableStations()),
                     _sideBarSectionWithCheckForGuestUser("Vehicle Details",
                         Icons.list_alt_outlined, VehicleDetailsPage()),
 
@@ -359,7 +372,10 @@ class AppDrawerState extends State<AppDrawer> {
 
                     _sideBarSection('About', Icons.info, AboutPage()),
 
-                    _sideBarSection('Log Out', Icons.logout, Signin())
+                    _sideBarSection('Log Out', Icons.logout, Signin()),
+                    // UserAccountsDrawerHeader(
+                    //     accountName: Text("Jane Doe"),
+                    //     accountEmail: Text("janedoe@gmail.com")),
                   ],
                 ),
               ),
@@ -731,7 +747,7 @@ class ProfileImage extends StatefulWidget {
 class ProfileImageState extends State<ProfileImage> {
   final imageURL =
       'https://image.shutterstock.com/image-vector/vector-profile-icon-600w-380603071.jpg';
-  final name = "John Doe";
+  final name = "John Doe"; //assign to name from API data.
   @override
   Widget build(BuildContext context) {
     return ListView(padding: EdgeInsets.zero, children: <Widget>[

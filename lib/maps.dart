@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:side_bar/available_staions.dart';
 
 class Maps extends StatelessWidget {
   // This widget is the root of your application.
@@ -36,7 +37,14 @@ class _MapPageState extends State<MapPage> {
           markerId: MarkerId('station 1'),
           position: LatLng(22.7196, 75.8577),
           infoWindow: InfoWindow(
-              title: 'WeSwap Station #1', snippet: 'address of the Station'),
+              title: 'WeSwap Station #1',
+              snippet: 'address of the Station',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AvailableStations()),
+                );
+              }),
         ),
       );
     });

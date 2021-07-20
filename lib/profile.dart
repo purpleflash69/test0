@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:side_bar/services-profile.dart';
+import 'package:side_bar/variables.dart';
 
 //void main() => runApp(MyApp());
 
@@ -49,60 +51,80 @@ class ImageName extends StatefulWidget {
 }
 
 class _ImageNameState extends State<ImageName> {
-  final imageURL =
-      'https://image.shutterstock.com/image-vector/vector-profile-icon-600w-380603071.jpg';
-  final email = "johndoe@gmail.com";
-  final swaps = '10';
-  final regID = '#12345678';
-  final name = 'John Doe';
-  final distance = '100 kms';
-  final phNumber = "0123456789";
+  // final imageURL =
+  //     'https://image.shutterstock.com/image-vector/vector-profile-icon-600w-380603071.jpg';
+
+  late Future<AlbumProfile> futureAlbumProfile;
+
+  @override
+  void initState() {
+    super.initState();
+
+    futureAlbumProfile = fetchAlbumProfile();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-        backgroundColor: Colors.blue[900],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: Padding(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                    child: CircleAvatar(
-                  backgroundImage: NetworkImage(imageURL),
-                  radius: 60,
-                )),
-                Divider(
-                  height: 50,
-                  color: Colors.black,
-                ),
-                textBox('NAME'),
-                textBoxBold(name),
-                textBox('EMAIL ID'),
-                textBoxBold(email),
-                textBox('PHONE NUMBER'),
-                textBoxBold(phNumber),
-                textBox('BATTERY SWAPS'),
-                textBoxBold(swaps),
-                textBox('CUSTOMER ID'),
-                textBoxBold(regID),
-                textBox('TOTAL DISTANCE TRAVELLED'),
-                textBoxBold(distance),
-                textBox('PAYMENT HISTORY'),
-                textBoxBold('500 Rs on 1/1/21'),
-                textBoxBold('400 Rs on 2/2/21'),
-                textBoxBold('400 Rs on 5/2/21'),
-              ],
-            ),
-          )),
-    );
+    return FutureBuilder<AlbumProfile>(
+        future: futureAlbumProfile,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Profile'),
+                backgroundColor: Colors.blue[900],
+                centerTitle: true,
+                elevation: 0.0,
+              ),
+              body: Padding(
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 30,
+                        ),
+                        // Center(
+                        //     child: CircleAvatar(
+                        //   backgroundImage: NetworkImage(imageURL),
+                        //   radius: 60,
+                        // )),
+                        // Divider(
+                        //   height: 50,
+                        //   color: Colors.black,
+                        // ),
+                        textBox('NAME'),
+                        textBoxBold(snapshot.data!.data.preloaded.name),
+                        textBox('EMAIL ID'),
+                        textBoxBold(snapshot.data!.data.preloaded.email),
+                        textBox('PHONE NUMBER'),
+                        textBoxBold(
+                            snapshot.data!.data.preloaded.mobileNo.toString()),
+                        textBox('CUSTOMER ID'),
+                        textBoxBold(snapshot.data!.data.vehicle[index].sId),
+                        textBox('TOTAL VEHICLES'),
+                        textBoxBold(
+                            snapshot.data!.data.vehicle.length.toString()),
+                        textBox('LAST PAYMENT'),
+                        textBoxBold(
+                            snapshot.data!.data.payments[0].amount.toString() +
+                                "/-Rs"),
+
+                        textBox("TRANSACTION ID"),
+                        textBoxBold(snapshot
+                            .data!.data.payments[0].transactionId
+                            .toString()),
+                      ],
+                    ),
+                  )),
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        });
   }
 }
