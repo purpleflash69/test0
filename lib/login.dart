@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:side_bar/authservice.dart';
 import 'forgot_password.dart';
@@ -7,6 +9,9 @@ import 'profile.dart';
 import 'services.dart';
 import 'vehicleDetails.dart';
 import 'about.dart';
+import 'package:http/http.dart' as http;
+import 'authhttp.dart';
+import 'authhttp2.dart';
 
 /*void main() {
   runApp(MyApp());
@@ -30,11 +35,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
-class Signin extends StatelessWidget {
-  Signin({Key? key}) : super(key: key);
+class Signin extends StatefulWidget {
+  const Signin({Key? key}) : super(key: key);
 
+  @override
+  _SigninState createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
   var mobile, password, token;
+  Future save() async {
+    var res = await http.post(
+        Uri.parse(
+            'https://fringuante-choucroute-25278.herokuapp.com/auth/login/'),
+        headers: <String, String>{'Context-Type': 'application/json'},
+        body: /*jsonEncode(*/
+            <String, String>{"customerId": mobile, "password": password});
+    /* print(res.statusCode);*/
+    /* Navigator.pushNamed(context, '/home');
+    guestUser = false;*/
+    /*Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => Dashboard()))*/
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -127,28 +151,39 @@ class Signin extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            border: Border.all(), color: Colors.white),
-                        child: TextButton(
-                          child: Text(
-                            'Sign In',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0xFF282F62), fontSize: 15.0),
-                          ),
-                          onPressed: () {
-                            AuthService().login(mobile, password).then((val) {
-                              if (val.data['success']) {
-                                token = val.data['token'];
-                                Navigator.pushNamed(context, '/home');
-                                guestUser = false;
-                              }
-                            });
-                          },
-                        ),
-                      ),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              border: Border.all(), color: Colors.white),
+                          child: TextButton(
+                              child: Text(
+                                'Sign In',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(0xFF282F62), fontSize: 15.0),
+                              ),
+                              onPressed: () {
+                                /* save();*/
+
+                                save().then((res) {
+                                  print(mobile);
+                                  print(password);
+
+                                  Map<String, dynamic> userMap =
+                                      jsonDecode(res.body);
+                                  var user = authhttp.fromJson(userMap);
+                                  print(user.success);
+                                  if (user.success) {
+                                    Navigator.pushNamed(context, '/home');
+                                    guestUser = false;
+                                  }
+                                });
+
+                                /*if (response.success) {
+                                print('SUCCESS');*/
+                                /*token = val.data['token'];*/
+                              })),
                     ),
+
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/forgot');
@@ -265,9 +300,29 @@ class Signin extends StatelessWidget {
   }
 }
 
-class Signup extends StatelessWidget {
-  Signup({Key? key}) : super(key: key);
-  var customerid, confirmpassword, password, token;
+class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
+
+  @override
+  _SignupState createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  var mobile, confirmpassword, password, token;
+  Future save() async {
+    var res = await http.post(
+        Uri.parse(
+            'https://fringuante-choucroute-25278.herokuapp.com/auth/signup/'),
+        headers: <String, String>{'Context-Type': 'application/json'},
+        body: /*jsonEncode(*/
+            <String, String>{"customerId": mobile, "password": password});
+    /* print(res.statusCode);*/
+    /* Navigator.pushNamed(context, '/home');
+    guestUser = false;*/
+    /*Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => Dashboard()))*/
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -327,7 +382,7 @@ class Signup extends StatelessWidget {
                           hintText: 'CUSTOMER ID here',
                         ),
                         onChanged: (val) {
-                          customerid = val;
+                          mobile = val;
                         },
                       ),
                     ),
@@ -396,22 +451,35 @@ class Signup extends StatelessWidget {
                         decoration: BoxDecoration(
                             border: Border.all(), color: Colors.white),
                         child: TextButton(
-                          child: Text(
-                            'Sign Up',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(0xFF282F62), fontSize: 15.0),
-                          ),
-                          onPressed: () {
-                            AuthService()
-                                .signup(customerid, confirmpassword, password)
-                                .then((val) {
-                              token = val.data['token'];
-                              Navigator.pushNamed(context, '/home');
-                              guestUser = false;
-                            });
-                          },
-                        ),
+                            child: Text(
+                              'Sign Up',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Color(0xFF282F62), fontSize: 15.0),
+                            ),
+                            onPressed: () {
+                              /* save();*/
+                              if (confirmpassword == password) {
+                                save().then((res) {
+                                  print(mobile);
+                                  print(password);
+                                  print(res.body);
+
+                                  Map<String, dynamic> userMap =
+                                      jsonDecode(res.body);
+                                  var user = authhttp2.fromJson(userMap);
+                                  print(user.success);
+                                  if (user.success) {
+                                    Navigator.pushNamed(context, '/home');
+                                    guestUser = false;
+                                  }
+                                });
+                              }
+
+                              /*if (response.success) {
+                                print('SUCCESS');*/
+                              /*token = val.data['token'];*/
+                            }),
                       ),
                     ),
 
@@ -516,9 +584,30 @@ class Signup extends StatelessWidget {
   }
 }
 
-class Guest extends StatelessWidget {
-  Guest({Key? key}) : super(key: key);
+class Guest extends StatefulWidget {
+  const Guest({Key? key}) : super(key: key);
+
+  @override
+  _GuestState createState() => _GuestState();
+}
+
+class _GuestState extends State<Guest> {
   var customerid, token;
+  Future save() async {
+    var res = await http.post(
+        Uri.parse(
+            'https://fringuante-choucroute-25278.herokuapp.com/user/user/guest'),
+        headers: <String, String>{'Context-Type': 'application/json'},
+        body: /*jsonEncode(*/
+            <String, String>{"customerId": customerid});
+    /* print(res.statusCode);*/
+    /* Navigator.pushNamed(context, '/home');
+    guestUser = false;*/
+    /*Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => Dashboard()))*/
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -599,9 +688,14 @@ class Guest extends StatelessWidget {
                                 color: Color(0xFF282F62), fontSize: 15.0),
                           ),
                           onPressed: () {
-                            AuthService().guest(customerid).then((val) {
-                              if (val.data['success']) {
-                                token = val.data['token'];
+                            save().then((res) {
+                              print(customerid);
+
+                              Map<String, dynamic> userMap =
+                                  jsonDecode(res.body);
+                              var user = authhttp.fromJson(userMap);
+                              print(user.success);
+                              if (user.success) {
                                 Navigator.pushNamed(context, '/home');
                                 guestUser = true;
                               }
