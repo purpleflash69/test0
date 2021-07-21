@@ -33,8 +33,10 @@ class StationBrain {
 
 class BatteryBrain {
   List<BatteryDetails> batteryBank = [
-    BatteryDetails(bn: 'Battery #1', bs: '10KWh/250Km/auto', bp: 'Rs 250'),
-    BatteryDetails(bn: 'Battery #2', bs: '10KWh/250Km/auto', bp: 'Rs 250'),
-    BatteryDetails(bn: 'Battery #3', bs: '10KWh/250Km/auto', bp: 'Rs 250'),
+    BatteryDetails(
+        bn: 'Car Battery Efficient', bs: '120KWh/120Km/car', bp: 'Rs 250'),
+    BatteryDetails(
+        bn: 'Bike Battery Efficient', bs: '130KWh/140Km/bike', bp: 'Rs 250'),
+    BatteryDetails(bn: 'Auto battery', bs: '130KWh/140Km/auto', bp: 'Rs 250'),
   ];
 }
