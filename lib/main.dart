@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         '/forgot': (context) => ForgotPassword(),
         '/home': (context) => AppDrawer(),
         '/setpassword': (context) => SetPassword(),
-        '/otp': (context) => Otp(),
+        //'/otp': (context) => Otp(),
         '/available_Station': (context) => AvailableStations(),
       },
     );
